@@ -11,7 +11,7 @@ const HomePage = () => {
 
   useEffect(() => {
     if (authUser) {
-      connectSocket()
+      connectSocket();
     }
   }, [connectSocket, authUser])
   

@@ -56,6 +56,8 @@ export interface ChatUser {
 }
 export interface ChatStore {
   messages: Message[];
+  updateUnReadMessageCount: () => void
+  updateMessageCount: () => void
   users: ChatUser[];
   markAsReadMessage: (id: string) => void;
   subscribeToMessage: () => void;

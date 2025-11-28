@@ -8,18 +8,20 @@ import useAuthStore from "../store/useAuthStore";
 
 
 const ChatContainer = () => {
-  const { selectedUser, isMessagesLoading, getMessages, messages, subscribeToMessage, unScribeToMessage } = useChatStore();
+  const { selectedUser, isMessagesLoading,updateUnReadMessageCount,updateMessageCount, getMessages, messages, subscribeToMessage, unScribeToMessage } = useChatStore();
   const { authUser } = useAuthStore()
   const messageRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     if (selectedUser) {
       getMessages(selectedUser?._id as string);
+      updateMessageCount();
+updateUnReadMessageCount()
     }
       subscribeToMessage()
 
     return () => unScribeToMessage()
-  }, [selectedUser, getMessages, subscribeToMessage, unScribeToMessage])
+  }, [selectedUser, getMessages,updateUnReadMessageCount,updateMessageCount, subscribeToMessage, unScribeToMessage])
 
   useEffect(() => {
        if(messageRef.current && messages) {
