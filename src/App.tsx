@@ -13,14 +13,14 @@ import useThemeStore from './store/useThemeStore'
 import Navbar from './components/Navbar'
 
 function App() {
-  const { checkAuth, isCheckingAuth } = useAuthStore();
+  const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
   const {theme} = useThemeStore()
 
   useEffect(() => {
     checkAuth()
   }, [checkAuth])
 
-  if (isCheckingAuth) {
+  if (isCheckingAuth && !authUser) {
     return <Loader />
   }
 
@@ -31,13 +31,14 @@ function App() {
        <Navbar/>
       <Suspense fallback={<Loader />}>
         <Routes>
+           <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<SignUpPage />} />
           <Route element = {<ProtectedRoute/>} path='/'>
             <Route element={<HomePage />} index />
             <Route element={<ProfilePage />} path='profile' />
           </Route>
            <Route element={<Setting />} path='/settings' />
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<SignUpPage />} />
+         
         </Routes>
       </Suspense>
     </div>

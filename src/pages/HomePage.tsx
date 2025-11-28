@@ -22,7 +22,7 @@ const HomePage = () => {
           <div className="flex h-full rounded-lg">
             
             {/* Sidebar - Hidden on mobile when user is selected, always visible on desktop */}
-            <div className={`${selectedUser ? 'hidden' : 'block'} lg:inline-block`}>
+            <div className={`${selectedUser ? 'hidden' : 'block w-full'} md:w-20 lg:inline-block`}>
               <Sidebar />
             </div>
             
