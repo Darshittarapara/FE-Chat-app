@@ -8,7 +8,7 @@ const MessageInput = () => {
   const [imagePreview, setImagePreview] = useState<{ id: number, url: string }[]>([]);
   const fileInputRef = useRef<any>(null);
   const [selectedFiles, setSelectedFiles] = useState<any[]>([])
-  const { sendMessage } = useChatStore()
+  const { sendMessage ,selectedUser} = useChatStore()
 
   // const { sendMessage } = useChatStore();
   console.log(selectedFiles, 'selectedFiles')
@@ -54,6 +54,7 @@ const MessageInput = () => {
     try {
       const formData = new FormData();
       formData.append('text', text);
+      formData.append('isRead', selectedUser? 'true' : 'false')
       selectedFiles.forEach(({ file }) => {
         formData.append("images", file);
       });

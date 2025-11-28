@@ -49,6 +49,16 @@ const useChatStore = create<ChatStore>((set, get) => ({
             }));
         });
     },
+    markAsReadMessage: async (id) => {
+      try {
+        const response = await axiosInstance.put(`/messages/mark-read/${id}`);
+        if(response) {
+            console.log(response)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    },
     unScribeToMessage: async () => {
         const socket = useAuthStore.getState().socket;
         if (!socket) return;

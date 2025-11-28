@@ -49,12 +49,15 @@ export interface Message {
 export interface ChatUser {
   _id: string;
   fullName: string;
+  lastMessage?: Message;
   email: string;
+  unreadCount: number;
   profilePic?: string;
 }
 export interface ChatStore {
   messages: Message[];
   users: ChatUser[];
+  markAsReadMessage: (id: string) => void;
   subscribeToMessage: () => void;
   unScribeToMessage: () => void
   setSelectedUser: (user: ChatUser | null) => void

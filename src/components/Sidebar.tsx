@@ -5,7 +5,7 @@ import { Users } from "lucide-react";
 import useAuthStore from "../store/useAuthStore";
 
 const Sidebar = () => {
-    const { users, getUsers, isUsersLoading, selectedUser, setSelectedUser } = useChatStore()
+    const { users,markAsReadMessage, getUsers, isUsersLoading, selectedUser, setSelectedUser } = useChatStore()
     const { onlineUsers } = useAuthStore();
     const [showOnlineOnly, setShowOnlineOnly] = useState(false);
 
@@ -41,7 +41,10 @@ const Sidebar = () => {
     {filteredUsers.map((user) => (
         <button
             key={user._id}
-            onClick={() => setSelectedUser(user)}
+            onClick={async () => {
+                setSelectedUser(user);
+                await markAsReadMessage(user._id)
+            }}
             className={`
                 w-full p-3 flex items-center gap-3
                 hover:bg-base-300 transition-colors
@@ -66,7 +69,7 @@ const Sidebar = () => {
             <div className="flex-1 text-left min-w-0">
                 <div className="font-medium truncate">{user.fullName}</div>
                 <div className="text-sm text-zinc-400 truncate">
-                    {onlineUsers.includes(user._id) ? "Online" : "Offline"}
+                    {user?.unreadCount ? `${user?.unreadCount} Message` :onlineUsers.includes(user._id) ? "Online" : "Offline"}
                 </div>
             </div>
 
