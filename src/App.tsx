@@ -24,8 +24,6 @@ function App() {
     return <Loader />
   }
 
-
-
   return (
     <div data-theme={theme} className='h-screen overflow-auto'>
        <Navbar/>
